@@ -1,0 +1,1951 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sizemug</title>
+    <link rel="shortcut icon" type="image/icon" href="favicon-sizemug.svg" />
+    <!-- inter google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/cbfa24e26c.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!-- external scripts -->
+    <script src="./jquery.js"></script>
+    <script src="./chat-script.js"></script>
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="./chat-converted.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="import" href="./icons/sprite.svg" />
+    <!-- <link rel="stylesheet" href="styles/output.css" /> -->
+    <link
+      rel="stylesheet"
+      href="./font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+
+  <body
+    x-data="{
+    notification_tab:'notifications', push__top:''
+  }"
+  >
+    <!-- header starts -->
+    <nav class="header">
+      <!-- app-logo -->
+      <div class="header_logo">
+        <button class="sidebar_trigger header_action__button !-ml-4 !mr-1">
+          <svg data-icon="menu">
+            <use href="./icons/sprite.svg#menu" />
+          </svg>
+        </button>
+        <a href="./index.html">
+          <img
+            loading="lazy"
+            src="logo.svg"
+            height="64"
+            width="110"
+            loading="lazy"
+          />
+        </a>
+
+        <button class="popup_trigger" data-popup-target=".header_dropdown">
+          <svg data-icon="expand">
+            <use href="./icons/sprite.svg#expand" />
+          </svg>
+        </button>
+        <dialog class="popup header_dropdown sidebar_nav" data-variant="base">
+          <ul>
+            <li>
+              <h4 class="text-base font-semibold py-2 px-4">Sizemug</h4>
+            </li>
+            <li>
+              <a href="#" class="sidebar_nav__link">
+                <img
+                  loading="lazy"
+                  src="icons/logo-marketplace.svg"
+                  class="size-6"
+                />
+                <span>Marketplace</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar_nav__link">
+                <img
+                  loading="lazy"
+                  src="icons/logo-calender.svg"
+                  class="size-6"
+                />
+                <span>Calender</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar_nav__link">
+                <img
+                  loading="lazy"
+                  src="icons/logo-board-mode.svg"
+                  class="size-6"
+                />
+                <span>Board Mode</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar_nav__link">
+                <img loading="lazy" src="icons/logo-saved.svg" class="size-6" />
+                <span>Saved</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar_nav__link">
+                <img
+                  loading="lazy"
+                  src="icons/logo-dropped.svg"
+                  class="size-6"
+                />
+                <span>Dropped</span>
+              </a>
+            </li>
+          </ul>
+        </dialog>
+      </div>
+      <!-- search-bar -->
+      <div class="md:flex px-10 lg:px-0 hidden col-span-2">
+        <label class="relative flex w-full">
+          <svg
+            data-icon="search"
+            class="absolute top-1/2 -translate-y-1/2 left-3 text-gray-500"
+          >
+            <use href="./icons/sprite.svg#search" />
+          </svg>
+          <input
+            placeholder="Search contents"
+            class="placeholder:text-gray-500 flex-1 font-roboto bg-gray-100 h-10 pr-4 py-3 rounded-xl pl-12"
+          />
+        </label>
+      </div>
+      <!-- action buttons -->
+      <div class="header_action">
+        <div class="flex gap-2 items-center">
+          <button class="header_action__button hidden md:flex">
+            <svg data-icon="create-fill" class="!size-8">
+              <use href="./icons/sprite.svg#create-fill" />
+            </svg>
+            <i class="tooltip">Create</i>
+          </button>
+          <button
+            class="header_action__button"
+            @click="push__top='messages'"
+            aria-haspopup="false"
+          >
+            <svg data-icon="chat-fill" class="!size-8">
+              <use href="icons/sprite.svg#chat-fill" />
+            </svg>
+            <i class="tooltip">Message</i>
+          </button>
+          <button
+            class="header_action__button"
+            @click="push__top='notification'"
+          >
+            <div
+              class="bg-red-500 rounded-full size-1.5 absolute top-2 right-2.5 ring-2 ring-white"
+            ></div>
+            <svg data-icon="bell-fill" class="!size-8">
+              <use href="icons/sprite.svg#bell-fill" class="not-pop" />
+            </svg>
+            <i class="tooltip">Notifications</i>
+          </button>
+          <!--top-message-->
+          <div
+            x-transition:enter="transition ease-out duration-150"
+            x-transition:enter-start="opacity-60 transform scale-95"
+            x-transition:enter-end="opacity-100 transform scale-100"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-end="opacity-0 transform scale-95"
+            x-transition:leave-start="opacity-100 x-translate-100 transform scale-100"
+            x-show="push__top=='messages'"
+            @click.away="push__top=''"
+            aria-haspopup="false"
+            class="top-message modal-wrapper z-52"
+          >
+            <div class="top-message-title">
+              <span class="material-symbols-outlined back" @click="push__top=''"
+                >chevron_left</span
+              >
+              <span class="label">Messages</span>
+            </div>
+            <div class="top-message-content">
+              <div class="top-message-items thin-scroll">
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-red"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-red"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-blue"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-red"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-orange"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-red"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-red"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-red"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-blue"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-orange"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-orange"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-red"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-green"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-green"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-green"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-green"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-red"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developers, Using React, Laravel,
+                      Codeigniter,, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-blue"></span>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="top-message-footer">
+              <a href="#">
+                <span>See all messages</span>
+                <i class="material-symbols-outlined">arrow_right_alt</i>
+              </a>
+            </div>
+          </div>
+
+          <!-- top notification -->
+          <div
+            style="display: none"
+            x-show="push__top=='notification'"
+            x-transition:enter="transition ease-out duration-150"
+            x-transition:enter-start="opacity-60 transform scale-95"
+            x-transition:enter-end="opacity-100 transform scale-100"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-end="opacity-0 transform scale-95"
+            x-transition:leave-start="opacity-100 x-translate-100 transform scale-100"
+            @click.away="push__top=''"
+            class="app_notification"
+          >
+            <header class="app_notification_header">
+              <div class="app_notification_header_title">
+                <span
+                  class="material-symbols-outlined back"
+                  @click="push__top=''"
+                  >chevron_left</span
+                >
+                <span class="label">Notifications</span>
+              </div>
+              <div class="app_notification_header_tab">
+                <label
+                  class="inline-tab"
+                  @click="notification_tab='notifications'"
+                >
+                  <input
+                    type="radio"
+                    x-bind:checked="notification_tab=='notifications'"
+                    name="notification_tab"
+                    hidden
+                  />
+                  <div>Notifications</div>
+                </label>
+                <label class="inline-tab" @click="notification_tab='requests'">
+                  <input
+                    type="radio"
+                    x-bind:checked="notification_tab=='requests'"
+                    name="notification_tab"
+                    hidden
+                  />
+                  <div>Requests</div>
+                </label>
+              </div>
+            </header>
+            <div class="app_notification_body">
+              <ul
+                class="app_notification_body_items y-thin-scroll"
+                x-show="notification_tab=='notifications'"
+              >
+                <li>
+                  <img src="./assets/user2.png" alt="avater" />
+                  <div class="app_notification_m_content">
+                    <ul class="notification_">
+                      <li class="notification_sender">
+                        <span class="sender__ ellipsis"
+                          >Micrsoft 365 Develop</span
+                        >
+                        <span class="dot__separator"
+                          ><small class="dot__separator_sm ind-gray"></small>
+                        </span>
+                        <span class="send__time">13 hours ago</span>
+                      </li>
+                      <li class="notification_message ellipsis">
+                        Microsoft 365 Developer Program | View in browser
+                        Discover the transfomation
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <img src="./assets/user2.png" alt="avater" />
+                  <div class="app_notification_m_content">
+                    <ul class="notification_">
+                      <li class="notification_sender">
+                        <span class="sender__ ellipsis"
+                          >Facebool 2 comment</span
+                        >
+                        <span class="dot__separator"
+                          ><small class="dot__separator_sm ind-gray"></small>
+                        </span>
+                        <span class="send__time">5 day ago</span>
+                      </li>
+                      <li class="notification_message ellipsis">
+                        Noticias do FC Barcelona and Barcatime TV posted.
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <img src="./assets/user2.png" alt="avater" />
+                  <div class="app_notification_m_content">
+                    <ul class="notification_">
+                      <li class="notification_sender">
+                        <span class="sender__ ellipsis">Snaptube</span>
+                        <span class="dot__separator"
+                          ><small class="dot__separator_sm ind-gray"></small>
+                        </span>
+                        <span class="send__time">1 min ago</span>
+                      </li>
+                      <li class="notification_message ellipsis">
+                        New version is availabl
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+              <ul
+                class="app_notification_body_items req"
+                x-show="notification_tab=='requests'"
+              >
+                <li>
+                  <img src="./assets/user2.png" alt="avater" />
+                  <div class="app_notification_m_content">
+                    <ul class="notification_">
+                      <li class="notification_sender">
+                        <span class="sender__ ellipsis">Musa Yussuf</span>
+                        <span class="dot__separator"
+                          ><small class="dot__separator_sm ind-gray"></small>
+                        </span>
+                        <span class="send__time">2 day ago</span>
+                      </li>
+                      <li class="notification_message ellipsis">
+                        I sent you message, let s have meeting by 12pm
+                      </li>
+                    </ul>
+                  </div>
+                  <div
+                    class="notification_follow_back"
+                    x-data="{follow:false, confirm:false}"
+                  >
+                    <button
+                      class="following-link"
+                      x-show="!follow"
+                      @click="follow=!follow"
+                      x-text="confirm ? 'Following' : 'Follow back'"
+                    >
+                      Follow back
+                    </button>
+                    <div class="confirm-following" x-show="follow">
+                      <div class="confirm-following-group">
+                        <button
+                          title="cancel"
+                          @click="()=>{follow=!follow;confirm=false}"
+                          aria-pressed="false"
+                          class="confirm-cancel material-symbols-outlined"
+                        >
+                          close
+                        </button>
+                        <button
+                          title="confirm"
+                          @click="()=>{follow=!follow;confirm=true}"
+                          aria-pressed="false"
+                          class="confirm-done material-symbols-outlined text-green-500 transition-all hover:rounded-full hover:bg-gray-200"
+                        >
+                          check
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <img src="./assets/user2.png" alt="avater" />
+                  <div class="app_notification_m_content">
+                    <ul class="notification_">
+                      <li class="notification_sender">
+                        <span class="sender__ ellipsis"
+                          >Sky News </span
+                        >
+                        <span class="dot__separator"
+                          ><small class="dot__separator_sm ind-gray"></small>
+                        </span>
+                        <span class="send__time">2 min ago</span>
+                      </li>
+                      <li class="notification_message ellipsis">
+                        BREAKING: Kylian Mbappe has join Real Madrid
+                      </li>
+                    </ul>
+                  </div>
+                  <div
+                    class="notification_follow_back"
+                    x-data="{follow:false, confirm:false}"
+                  >
+                    <button
+                      class="following-link"
+                      x-show="!follow"
+                      @click="follow=!follow"
+                      x-text="confirm ? 'Following' : 'Follow back'"
+                    >
+                      Follow back
+                    </button>
+                    <div class="confirm-following" x-show="follow">
+                      <div class="confirm-following-group">
+                        <button
+                          title="cancel"
+                          @click="()=>{follow=!follow;confirm=false}"
+                          aria-pressed="false"
+                          class="confirm-cancel material-symbols-outlined"
+                        >
+                          close
+                        </button>
+                        <button
+                          title="confirm"
+                          @click="()=>{follow=!follow;confirm=true}"
+                          aria-pressed="false"
+                          class="confirm-done material-symbols-outlined text-green-500 transition-all hover:rounded-full hover:bg-gray-200"
+                        >
+                          check
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <img src="./assets/user2.png" alt="avater" />
+                  <div class="app_notification_m_content">
+                    <ul class="notification_">
+                      <li class="notification_sender">
+                        <span class="sender__ ellipsis">Oladimeji Akeem</span>
+                        <span class="dot__separator"
+                          ><small class="dot__separator_sm ind-gray"></small>
+                        </span>
+                        <span class="send__time">2 day ago</span>
+                      </li>
+                      <li class="notification_message ellipsis">
+                        Atilola Waris was tagged in a post
+                      </li>
+                    </ul>
+                  </div>
+                  <div
+                    class="notification_follow_back"
+                    x-data="{follow:false, confirm:false}"
+                  >
+                    <button
+                      class="following-link"
+                      x-show="!follow"
+                      @click="follow=!follow"
+                      x-text="confirm ? 'Following' : 'Follow back'"
+                    >
+                      Follow back
+                    </button>
+                    <div class="confirm-following" x-show="follow">
+                      <div class="confirm-following-group">
+                        <button
+                          title="cancel"
+                          @click="()=>{follow=!follow;confirm=false}"
+                          aria-pressed="false"
+                          class="confirm-cancel material-symbols-outlined"
+                        >
+                          close
+                        </button>
+                        <button
+                          title="confirm"
+                          @click="()=>{follow=!follow;confirm=true}"
+                          aria-pressed="false"
+                          class="confirm-done material-symbols-outlined text-green-500 transition-all hover:rounded-full hover:bg-gray-200"
+                        >
+                          check
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <img src="./assets/user2.png" alt="avater" />
+                  <div class="app_notification_m_content">
+                    <ul class="notification_">
+                      <li class="notification_sender">
+                        <span class="sender__ ellipsis"
+                          >Dhikr Before Sleep</span
+                        >
+                        <span class="dot__separator"
+                          ><small class="dot__separator_sm ind-gray"></small>
+                        </span>
+                        <span class="send__time">2 hours ago</span>
+                      </li>
+                      <li class="notification_message ellipsis">
+                        Do you wish to set a reminder
+                      </li>
+                    </ul>
+                  </div>
+                  <div
+                    class="notification_follow_back"
+                    x-data="{follow:false, confirm:false}"
+                  >
+                    <button
+                      class="following-link"
+                      x-show="!follow"
+                      @click="follow=!follow"
+                      x-text="confirm ? 'Following' : 'Follow back'"
+                    >
+                      Follow back
+                    </button>
+                    <div class="confirm-following" x-show="follow">
+                      <div class="confirm-following-group">
+                        <button
+                          title="cancel"
+                          @click="()=>{follow=!follow;confirm=false}"
+                          aria-pressed="false"
+                          class="confirm-cancel material-symbols-outlined"
+                        >
+                          close
+                        </button>
+                        <button
+                          title="confirm"
+                          @click="()=>{follow=!follow;confirm=true}"
+                          aria-pressed="false"
+                          class="confirm-done material-symbols-outlined text-green-500 transition-all hover:rounded-full hover:bg-gray-200"
+                        >
+                          check
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <img src="./assets/user2.png" alt="avater" />
+                  <div class="app_notification_m_content">
+                    <ul class="notification_">
+                      <li class="notification_sender">
+                        <span class="sender__ ellipsis">Sizemug</span>
+                        <span class="dot__separator"
+                          ><small class="dot__separator_sm ind-gray"></small>
+                        </span>
+                        <span class="send__time">2 day ago</span>
+                      </li>
+                      <li class="notification_message ellipsis">
+                        Sizemug sent you a friend request
+                      </li>
+                    </ul>
+                  </div>
+                  <div
+                    class="notification_follow_back"
+                    x-data="{follow:false, confirm:false}"
+                  >
+                    <button
+                      class="following-link"
+                      x-show="!follow"
+                      @click="follow=!follow"
+                      x-text="confirm ? 'Following' : 'Follow back'"
+                    >
+                      Follow back
+                    </button>
+                    <div class="confirm-following" x-show="follow">
+                      <div class="confirm-following-group">
+                        <button
+                          title="cancel"
+                          @click="()=>{follow=!follow;confirm=false}"
+                          aria-pressed="false"
+                          class="confirm-cancel material-symbols-outlined"
+                        >
+                          close
+                        </button>
+                        <button
+                          title="confirm"
+                          @click="()=>{follow=!follow;confirm=true}"
+                          aria-pressed="false"
+                          class="confirm-done material-symbols-outlined text-green-500 transition-all hover:rounded-full hover:bg-gray-200"
+                        >
+                          check
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="app_notification_footer">
+              <a href="#">
+                <span>See all notifications</span>
+                <i class="material-symbols-outlined">arrow_right_alt</i>
+              </a>
+            </div>
+          </div>
+
+          <button class="header_action__button flex md:hidden">
+            <svg data-icon="bell-fill" class="!size-7">
+              <use href="./icons/sprite.svg#search" class="stroke-[3]" />
+            </svg>
+            <i class="tooltip">Search</i>
+          </button>
+        </div>
+        <img
+          loading="lazy"
+          src="https://source.unsplash.com/random/100x100/?person"
+          width="40"
+          height="40"
+          loading="lazy"
+          class="object-cover rounded-full border border-purple-600 shrink-0 hidden md:flex"
+        />
+      </div>
+    </nav>
+
+    <div class="content_area">
+      <!-- sidebar -->
+      <aside id="sidebar" aria-expanded="true">
+        <div class="sidebar_container__bordered">
+          <div class="mobile_only_sidebar">
+            <div class="chat-search-icons">
+              <div class="header-profile">
+                <img src="./assets/user5.png" alt="" />
+                <span>
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                </span>
+              </div>
+
+              <div class="mobile_only_title">
+                <h1>Chat</h1>
+              </div>
+
+              <div class="header-icons">
+                <span>
+                  <i class="fa-regular fa-circle-play"></i>
+                </span>
+
+                <span id="openGroupModal">
+                  <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="tabs">
+              <button class="tab-link active" data-tab="all">All</button>
+              <button class="tab-link" data-tab="unread">Unread</button>
+              <button class="tab-link" data-tab="favourites">Favourites</button>
+              <button class="tab-link" data-tab="groups">Groups</button>
+            </div>
+          </div>
+
+          <div class="chat-list" id="chat-list"></div>
+          <div>
+            <div class="group-container">
+              <div class="footer">
+                <div>
+                  <div class="light-mode-toggle">
+                    <label class="switch">
+                      <input type="checkbox" id="lightModeToggle" />
+                      <span class="slider round"></span>
+                    </label>
+                    <span class="toggle-label">Light mode</span>
+                  </div>
+
+                  <div class="footer-box">
+                    <div class="crypto-icon">
+                      <i class="fa fa-database" aria-hidden="true"></i>
+                    </div>
+                    <div class="crypto-text">
+                      Get Sizemug Coins Use for purchases & send
+                    </div>
+                    <button class="crypto-arrow">
+                      <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="footer-text">
+                  <p>Contact About Privacy policy Terms</p>
+                  <span>© 2024 Sizemug</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+      <main class="chat-layout">
+        <div class="profile-component" id="profile-component">
+          <div class="img-icon" id="close-chat">
+            <i class="fa-solid fa-chevron-left"></i>
+            <img
+              src="https://via.placeholder.com/40"
+              alt="Profile Picture"
+              class="profile-picture"
+            />
+          </div>
+
+          <div class="profile-info">
+            <div class="profile-details">
+              <div class="profile-name">
+                <span>Sophia Vera</span>
+                <div class="status">
+                  Online <span class="status-indicator"></span>
+                </div>
+              </div>
+              <div class="file-icons">
+                <li class="file-icon-card" data-icon="picture">
+                  <i
+                    id="toggle-media-modal"
+                    class="fa fa-picture-o"
+                    aria-hidden="true"
+                  ></i>
+                </li>
+                <li class="file-icon-card" data-icon="file">
+                  <i
+                    id="open-modal-btn"
+                    class="fa fa-file-text-o"
+                    aria-hidden="true"
+                  ></i>
+                </li>
+                <li class="file-icon-card" data-icon="link">
+                  <i
+                    id="open-link-modal-btn"
+                    class="fa fa-link"
+                    aria-hidden="true"
+                  ></i>
+                </li>
+                <li class="file-icon-card only-group" data-icon="link">
+                  <i
+                    id="open-group-modal-btn"
+                    class="fa-solid fa-user-group"
+                  ></i>
+                </li>
+              </div>
+            </div>
+          </div>
+          <div class="actions">
+            <span id="openCallModal">
+              <i class="fa fa-phone action-button call" aria-hidden="true"></i>
+            </span>
+
+            <a href="./video-chat.html">
+              <i
+                class="fa fa-video-camera action-button video"
+                aria-hidden="true"
+              ></i>
+            </a>
+
+            <button class="action-button more">&#8942;</button>
+            <button id="close-more-action" class="close-more-action">
+              <i class="fa-regular fa-circle-xmark"></i>
+            </button>
+          </div>
+
+          <div id="moreModal" class="more-actions-modal">
+            <div class="more-actions-modal-box">
+              <button
+                class="close-more-action-mobile big"
+                id="close-more-action"
+              >
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+              <div class="more-actions-modal-content">
+                <ul class="grid-container">
+                  <li class="grid-item">
+                    <span class="icon"
+                      ><i class="fa fa-heart-o" aria-hidden="true"></i
+                    ></span>
+                    Favourite
+                  </li>
+
+                  <li class="grid-item">
+                    <span class="icon"
+                      ><i class="fa-solid fa-envelope-open-text"></i
+                    ></span>
+                    Unread
+                  </li>
+                  <li class="grid-item" id="openModalDelete">
+                    <span class="icon"
+                      ><i class="fa fa-trash-o" aria-hidden="true"></i
+                    ></span>
+                    Delete
+                  </li>
+                  <li class="grid-item" id="openModalBlock">
+                    <span class="icon"
+                      ><i class="fa fa-ban" aria-hidden="true"></i
+                    ></span>
+                    Block
+                  </li>
+                  <li class="grid-item mobile" id="openCallModal mobile">
+                    <span class="icon" 
+                      ><i class="fa-solid fa-phone"></i
+                    ></span>
+                    Voice Call
+                  </li>
+                  <li class="grid-item">
+                    <a href="/video-chat.html" class="icon"
+                      ><i class="fa-solid fa-video"></i
+                    ></a>
+                    Video Call
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="welcome-text" id="welcomeText">
+          <div class="empty-chat">
+            <img src="/assets/frame.png" alt="icon" class="img" />
+
+            <h3 class="empty-chat-text">
+              Oops, seems like there are no chats here
+            </h3>
+            <button class="create-button" id="openModal">
+              Create new Chat
+            </button>
+          </div>
+        </div>
+
+        <div class="chat-container">
+          <div class="chat-card">
+            <div class="chat-box" id="chat-box"></div>
+            <div id="media-modal" class="media-modal">
+              <div class="media-modal-content">
+                <div class="media-modal-header">
+                  <h3>Media</h3>
+                  <span>(0 Selected)</span>
+                </div>
+                <div class="media-files-container"></div>
+              </div>
+              <button class="select-button">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </button>
+              <input
+                type="file"
+                id="file-upload"
+                style="display: none"
+                multiple
+              />
+            </div>
+            <div class="file-modal" id="file-modal">
+              <div class="file-modal-content">
+                <div class="file-modal-header">
+                  <h3>Document</h3>
+                  <span>(0 Selected)</span>
+                </div>
+                <div
+                  class="file-cards-container"
+                  id="file-cards-container"
+                ></div>
+                <button class="select-button-files">
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+                <input
+                  type="file"
+                  id="upload-files"
+                  style="display: none"
+                  multiple
+                />
+              </div>
+            </div>
+            <div class="link-modal" id="link-modal">
+              <div class="link-modal-content">
+                <div class="link-modal-header">
+                  <h3>Link</h3>
+                  <span>(<span id="link-count">0</span> Selected)</span>
+                </div>
+                <div
+                  class="link-cards-container"
+                  id="link-cards-container"
+                ></div>
+              </div>
+            </div>
+
+            <div class="call-modal" id="callModal">
+              <div class="call-modal-content">
+                <img src="./assets/user2.png" alt="user-profile" />
+
+                <div class="controls">
+                  <div class="control-button">
+                    <div class="user-icon green">
+                      <img src="./assets/Phone_fill.png" alt="" />
+                    </div>
+                  </div>
+                  <div class="control-button">
+                    <div class="user-icon">
+                      <i class="fa fa-microphone" aria-hidden="true"></i>
+                    </div>
+                  </div>
+
+                  <div class="control-button">
+                    <div class="end-call">
+                      <i class="fa fa-phone" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="group-modal" class="group-modal-inside">
+              <div class="groups-container">
+                <div class="groups-header">
+                  <div class="search">
+                    <span><i class="fa fa-search" aria-hidden="true"></i></span>
+                    <p>Search members</p>
+                  </div>
+                  <button class="member-button" id="openAddMemberModal">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    <span>Add Member</span>
+                  </button>
+                </div>
+                <div class="members-list" id="members-list"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="addMemberModal" class="member-modal">
+          <div class="member-modal-content">
+            <div class="modal-header">
+              <div class="modal-tabs">
+                <h2 data-tab="following" class="active">Following</h2>
+                <h2 data-tab="followers">Followers</h2>
+              </div>
+              <div class="search">
+                <span><i class="fa fa-search" aria-hidden="true"></i></span>
+                <input
+                  type="text"
+                  placeholder="Search following"
+                  id="searchInput"
+                />
+              </div>
+            </div>
+            <div class="members-section">
+              <ul class="members-list-modal" id="followingList">
+                <li>
+                  <span class="select-all">Select All</span>
+                  <input type="checkbox" id="selectAllCheckbox" />
+                </li>
+                <li>
+                  <div class="member-card">
+                    <img src="./assets/user1.png" alt="user image" />
+                    <span>Wade Warren</span>
+                  </div>
+                  <input type="checkbox" class="member-checkbox" />
+                </li>
+                <li>
+                  <div class="member-card">
+                    <img src="./assets/user2.png" alt="user image" />
+                    <span>Jenny Wilson</span>
+                  </div>
+                  <input type="checkbox" class="member-checkbox" />
+                </li>
+                <li>
+                  <div class="member-card">
+                    <img src="./assets/user3.png" alt="user image" />
+                    <span>Peter Wilson</span>
+                  </div>
+                  <input type="checkbox" class="member-checkbox" />
+                </li>
+                <li>
+                  <div class="member-card">
+                    <img src="./assets/user4.png" alt="user image" />
+                    <span>John White</span>
+                  </div>
+                  <input type="checkbox" class="member-checkbox" />
+                </li>
+                <li>
+                  <div class="member-card">
+                    <img src="./assets/user5.png" alt="user image" />
+                    <span>John White</span>
+                  </div>
+                  <input type="checkbox" class="member-checkbox" />
+                </li>
+                <li>
+                  <div class="member-card">
+                    <img src="./assets/user1.png" alt="user image" />
+                    <span>John White</span>
+                  </div>
+                  <input type="checkbox" class="member-checkbox" />
+                </li>
+              </ul>
+              <ul
+                class="members-list-modal"
+                id="followersList"
+                style="display: none"
+              >
+                <li>
+                  <span class="select-all">Select All</span>
+                  <input type="checkbox" id="selectAllCheckbox" />
+                </li>
+                <li>
+                  <div class="member-card">
+                    <img src="./assets/user3.png" alt="user image" />
+                    <span>Cameron Williamson</span>
+                  </div>
+                  <input type="checkbox" class="member-checkbox" />
+                </li>
+                <li>
+                  <div class="member-card">
+                    <img src="./assets/user4.png" alt="user image" />
+                    <span>Esther Howard</span>
+                  </div>
+                  <input type="checkbox" class="member-checkbox" />
+                </li>
+              </ul>
+            </div>
+
+            <div class="modal-footer">
+              <button id="cancelBtn">Cancel</button>
+              <button id="addMembersBtn">Add Members</button>
+            </div>
+          </div>
+        </div>
+        <!-- Chat input box -->
+        <div class="chat-input-container">
+          <div
+            class="chat-input-image-container"
+            id="chat-input-image-container"
+          ></div>
+
+          <div
+            class="chat-input-file-container"
+            id="chat-input-file-container"
+          ></div>
+          <div id="metadata-display"></div>
+
+          <div class="input-wrapper">
+            <input
+              type="text"
+              class="chat-input"
+              placeholder="Type here..."
+              id="url-input"
+            />
+            <div id="audio-waves"></div>
+            <button class="send-button" id="fetch-button">
+              <i class="fa fa-paper-plane" aria-hidden="true"></i>
+            </button>
+
+            <button class="send-button-images"></button>
+          </div>
+
+          <div class="icons">
+            <span id="attachment-icon">
+              <img
+                loading="lazy"
+                src="icons/icon-upload.svg"
+                class="attachment-icon"
+              />
+            </span>
+
+            <span id="imoji-attachment">
+              <i class="fa fa-meh-o" aria-hidden="true"></i>
+            </span>
+
+            <div id="microphone-icon" class="not-clicked">
+              <i class="fa fa-microphone" aria-hidden="true"></i>
+            </div>
+
+            <button class="send-coin-button">
+              <div class="send-coin-icon">
+                <i class="fa fa-database" aria-hidden="true"></i>
+              </div>
+              <span>Send Coin</span>
+            </button>
+            <button class="send-gift-button">
+              <div class="send-gift-icon">
+                <i class="fa fa-gift" aria-hidden="true"></i>
+              </div>
+              <span>Send Gift</span>
+            </button>
+          </div>
+
+          <div class="popup-menu" id="popup-menu">
+            <div class="popup-menu-box">
+              <button class="close-more-action-mobile small">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+              <div class="popup-menu-content">
+                <div class="popup-item">
+                  <span>
+                    <i class="fa fa-download" aria-hidden="true"></i>
+                  </span>
+                  Upload from computer
+                </div>
+                <div class="popup-item">
+                  <span>
+                    <i class="fa fa-cloud" aria-hidden="true"></i>
+                  </span>
+                  Upload from cloud
+                </div>
+                <div class="popup-item">
+                  <span>
+                    <i class="fa fa-folder" aria-hidden="true"></i>
+                  </span>
+                  Upload from Files
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="emoji-popup" id="emoji-popup">
+            <div class="emoji-popup-content">
+              <div class="emoji-header">
+                <span>Emojis</span>
+                <button class="close-more-action-mobile imoji" id="close-moji">
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+              </div>
+              <div class="emoji-grid">
+                <span>😀</span><span>😁</span><span>😂</span><span>🤣</span
+                ><span>😃</span> <span>😄</span><span>😅</span><span>😆</span
+                ><span>😉</span><span>😊</span> <span>😋</span><span>😎</span
+                ><span>😍</span><span>😘</span><span>😗</span> <span>😙</span
+                ><span>😚</span><span>☺️</span><span>🙂</span><span>🤗</span>
+                <span>🤩</span><span>🤔</span><span>🤨</span><span>😐</span
+                ><span>😑</span> <span>😶</span><span>🙄</span><span>😏</span
+                ><span>😣</span><span>😥</span> <span>😮</span><span>🤐</span
+                ><span>😯</span><span>😪</span><span>😫</span> <span>😴</span
+                ><span>😌</span><span>😛</span><span>😜</span><span>😝</span>
+                <span>🤤</span><span>😒</span><span>😓</span><span>😔</span
+                ><span>😕</span> <span>🙃</span><span>🤑</span><span>😲</span
+                ><span>☹️</span><span>🙁</span> <span>😖</span><span>😞</span
+                ><span>😟</span><span>😤</span><span>😢</span> <span>😭</span
+                ><span>😦</span><span>😧</span><span>😨</span><span>😩</span>
+                <span>🤯</span><span>😬</span><span>😰</span><span>😱</span
+                ><span>🥵</span> <span>🥶</span><span>😳</span><span>🤪</span
+                ><span>😵</span><span>🥴</span> <span>😠</span><span>😡</span
+                ><span>🤬</span><span>🤡</span><span>🤠</span> <span>😇</span
+                ><span>🥳</span><span>🥺</span><span>🤥</span><span>🤓</span>
+                <span>😈</span><span>👿</span><span>💀</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="sendCoinModal" class="send-coin-modal">
+          <div class="send-coin-modal-content">
+            <div class="modal-header">
+              <div style="display: flex; align-items: center">
+                <div class="send-coin-icon">
+                  <i class="fa fa-database" aria-hidden="true"></i>
+                </div>
+                <span class="header-text">Send Coin</span>
+              </div>
+
+              <span class="your-coins">Your coins: 100</span>
+            </div>
+            <div class="modal-body">
+              <div class="user-info">
+                <img
+                  src="./assets/user1.png"
+                  alt="User Image"
+                  class="user-image"
+                />
+                <span>Sophia Vera</span>
+              </div>
+              <div class="coin-options">
+                <button class="coin-button">1</button>
+                <button class="coin-button">2</button>
+                <button class="coin-button">5</button>
+                <button class="coin-button">10</button>
+                <button class="coin-button">20</button>
+                <button class="coin-button selected">100</button>
+              </div>
+              <div class="coin-summary">100 coins to Sophia Vera</div>
+            </div>
+            <div class="modal-footer">
+              <button class="cancel-button">Cancel</button>
+              <button class="send-coin-button">Send</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="myModal" class="modal">
+          <div class="modal-content" id="modalContent">
+            <div class="modal-header">
+              <h2>Create Chat</h2>
+              <input
+                type="text"
+                placeholder="Search followers"
+                class="search-input"
+              />
+            </div>
+            <div class="modal-body">
+              <div class="select-all">
+                <label for="selectAll">Select all</label>
+                <input type="checkbox" id="selectAll" />
+              </div>
+              <ul class="user-list">
+                <li>
+                  <div class="image-card">
+                    <img src="./assets/user1.png" alt="Wade Warren" />
+                    <span>Wade Warren</span>
+                  </div>
+
+                  <input type="checkbox" class="user-checkbox" />
+                </li>
+                <li>
+                  <div class="image-card">
+                    <img src="./assets/user2.png" alt="Jenny Wilson" />
+                    <span>Jenny Wilson</span>
+                  </div>
+                  <input type="checkbox" class="user-checkbox" />
+                </li>
+                <li>
+                  <div class="image-card">
+                    <img src="./assets/user3.png" alt="Cameron Williamson" />
+                    <span>Cameron Williamson</span>
+                  </div>
+                  <input type="checkbox" class="user-checkbox" />
+                </li>
+                <li>
+                  <div class="image-card">
+                    <img src="./assets/user4.png" alt="Esther Howard" />
+                    <span>Esther Howard</span>
+                  </div>
+                  <input type="checkbox" class="user-checkbox" />
+                </li>
+                <li>
+                  <div class="image-card">
+                    <img src="./assets/user5.png" alt="Eleanor Pena" />
+                    <span>Eleanor Pena</span>
+                  </div>
+                  <input type="checkbox" class="user-checkbox" />
+                </li>
+              </ul>
+            </div>
+            <div class="modal-footer">
+              <button id="cancelBt">Cancel</button>
+              <button id="createBtn">Create</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="sendGiftModal" class="gift-modal">
+          <div class="gift-modal-content">
+            <div class="gift-modal-header">
+              <div style="display: flex; align-items: center">
+                <div class="send-gift-icon">
+                  <i class="fa fa-gift" aria-hidden="true"></i>
+                </div>
+                <span>Send Gift</span>
+              </div>
+            </div>
+            <div class="modal-body">
+              <div class="user-info">
+                <img
+                  src="./assets/user1.png"
+                  alt="User Image"
+                  class="user-image"
+                />
+                <span>Sophia Vera</span>
+              </div>
+              <div class="category">
+                <span>Christmas</span>
+              </div>
+              <div class="gift-options">
+                <button class="gift-button">
+                  <img src="./assets/Peer.png" alt="Gift" />
+                </button>
+                <button class="gift-button">
+                  <img src="./assets/Peer1.png" alt="Gift" />
+                </button>
+                <button class="gift-button selected">
+                  <img src="./assets/Peer10.png" alt="Gift" />
+                </button>
+                <button class="gift-button">
+                  <img src="./assets/Peer2.png" alt="Gift" />
+                </button>
+                <button class="gift-button">
+                  <img src="./assets/Peer3.png" alt="Gift" />
+                </button>
+                <button class="gift-button">
+                  <img src="./assets/Peer4.png" alt="Gift" />
+                </button>
+                <button class="gift-button">
+                  <img src="./assets/Peer75.png" alt="Gift" />
+                </button>
+                <button class="gift-button">
+                  <img src="./assets/Peer5.png" alt="Gift" />
+                </button>
+                <button class="gift-button">
+                  <img src="./assets/Peer6.png" alt="Gift" />
+                </button>
+                <button class="gift-button">
+                  <img src="./assets/Peer8.png" alt="Gift" />
+                </button>
+                <button class="gift-button">
+                  <img src="./assets/Peer9.png" alt="Gift" />
+                </button>
+                <button class="gift-button">
+                  <img src="./assets/Peer10.png" alt="Gift" />
+                </button>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="cancel-button">Cancel</button>
+              <button class="send-gift-button">Send</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <div id="createGroupModal" class="groupModal">
+      <div class="group-modal-content">
+        <span class="close">&times;</span>
+        <h2 class="groupName">Create Group</h2>
+        <form id="createGroupForm">
+          <div class="form-group">
+            <label for="groupName">Group name</label>
+            <input
+              type="text"
+              id="groupName"
+              name="groupName"
+              placeholder="Title"
+            />
+          </div>
+          <div class="form-group">
+            <label for="groupImage">Image</label>
+            <div class="upload-container" id="uploadContainer">
+              <span>
+                <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+              </span>
+              <input
+                type="file"
+                id="groupImage"
+                name="groupImage"
+                accept="image/*"
+                multiple
+              />
+              <label for="groupImage" class="upload-label"
+                >Click to upload or drag and drop</label
+              >
+              <small>SVG, PNG, JPG or GIF (max. 800x400px)</small>
+            </div>
+            <div class="image-preview" id="imagePreview"></div>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="cancel">Cancel</button>
+            <button type="submit" class="next">Next</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="homModal" class="home-modal">
+      <div class="home-modal-box">
+        <button class="home-close-btn" id="home-close-btn">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="home-modal-content">
+          <ul class="grid-container">
+            <li class="grid-item">
+              <span class="icon"><i class="fa-solid fa-list-check"></i></span>
+              Create Tasks
+            </li>
+
+            <li class="grid-item">
+              <span class="icon"
+                ><i class="fa-solid fa-users-viewfinder"></i
+              ></span>
+              Find collaboration
+            </li>
+            <li class="grid-item">
+              <span class="icon"><i class="fa-solid fa-feather"></i></span>
+              Make post
+            </li>
+            <li class="grid-item">
+              <span class="icon"
+                ><i class="fa-solid fa-arrow-trend-up"></i
+              ></span>
+              Go live
+            </li>
+            <li class="grid-item">
+              <span class="icon"
+                ><i class="fa-solid fa-chalkboard-user"></i
+              ></span>
+              New Board
+            </li>
+            <li class="grid-item">
+              <a href="/video-chat.html" class="icon"
+                ><i class="fa-solid fa-paste"></i
+              ></a>
+              New Paper
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id="deleteModal" class="delete-modal">
+      <div class="modal-content-delete">
+        <div class="info">
+          <i class="fa fa-info-circle" aria-hidden="true"></i>
+        </div>
+        <div class="text-card">
+          <h3>Delete Paper</h3>
+          <p>
+            Are you sure you want to Remove this user? This action cannot be
+            undone.
+          </p>
+        </div>
+        <div class="buttons">
+          <button class="close-delete">Cancel</button>
+          <button class="excute-delete">Delete</button>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar">
+      <a href="./index.html" class="navbar_item">
+        <svg data-icon>
+          <use href="./icons/sprite.svg#home" />
+        </svg>
+        <span>Home</span>
+      </a>
+      <a href="#" class="navbar_item tablet_only" data-notification>
+        <svg data-icon>
+          <use href="./icons/sprite.svg#discovery" />
+        </svg>
+        <span>Explore</span>
+      </a>
+      <a href="#" class="navbar_item">
+        <svg data-icon>
+          <use href="./icons/sprite.svg#video" />
+        </svg>
+        <span>Live</span>
+      </a>
+      <a
+        href="#"
+        class="navbar_item navbar_item__bold mobile_only"
+        id="openHomeModalBtn"
+      >
+        <svg data-icon>
+          <use href="./icons/sprite.svg#add" />
+        </svg>
+      </a>
+      <a href="./chat.html" class="navbar_item" data-notification>
+        <svg data-icon>
+          <use href="./icons/sprite.svg#message" />
+        </svg>
+        <span>Chat</span>
+      </a>
+      <a href="#" class="navbar_item tablet_only">
+        <svg data-icon>
+          <use href="./icons/sprite.svg#edit" />
+        </svg>
+        <span>New Paper</span>
+      </a>
+      <a href="#" class="navbar_item tablet_only">
+        <svg data-icon>
+          <use href="./icons/sprite.svg#share" />
+        </svg>
+        <span>Following</span>
+      </a>
+      <button
+        href="#"
+        class="navbar_item popup_trigger tablet_only"
+        data-popup-target=".navbar_popup"
+      >
+        <svg data-icon>
+          <use href="./icons/sprite.svg#expand" />
+        </svg>
+        <span>More</span>
+      </button>
+      <button href="#" class="navbar_item mobile_only">
+        <img
+          src="https://source.unsplash.com/random/100x100/?person"
+          width="40"
+          height="40"
+          loading="lazy"
+          class="object-cover rounded-full border border-purple-600 shrink-0 size-7 flex"
+        />
+        <span>Profile</span>
+      </button>
+
+      <dialog class="navbar_popup popup">
+        <div class="sidebar_suggestions">
+          <h4>Suggestions</h4>
+          <ul aria-expanded="false">
+            <li>
+              <img
+                loading="lazy"
+                src="https://source.unsplash.com/random/50x50/?person"
+              />
+              <span> Esther Howard </span>
+              <a href="#" class="">Follow</a>
+            </li>
+            <li>
+              <img
+                loading="lazy"
+                src="https://source.unsplash.com/random/50x50/?person"
+              />
+              <span> Jenny Wilson </span>
+              <a href="#">Follow</a>
+            </li>
+            <li>
+              <img
+                loading="lazy"
+                src="https://source.unsplash.com/random/50x50/?person"
+              />
+              <span> Robert Fox </span>
+              <a href="#">Follow</a>
+            </li>
+            <li>
+              <img
+                loading="lazy"
+                src="https://source.unsplash.com/random/50x50/?person"
+              />
+              <span> Darrell Steward </span>
+              <a href="#">
+                <svg data-icon="search">
+                  <use href="./icons/sprite.svg#done" />
+                </svg>
+              </a>
+            </li>
+          </ul>
+          <button class="text-gray-500 mt-2 max-w-max ml-2">
+            See More ...
+          </button>
+        </div>
+        <hr />
+        <div class="sidebar_nav">
+          <h4>Sizemug</h4>
+          <ul data-variant="base">
+            <li>
+              <a href="#" class="sidebar_nav__link">
+                <img
+                  loading="lazy"
+                  src="icons/logo-marketplace.svg"
+                  class="size-6"
+                />
+                <span>Marketplace</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar_nav__link">
+                <img
+                  loading="lazy"
+                  src="icons/logo-calender.svg"
+                  class="size-6"
+                />
+                <span>Calender</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar_nav__link">
+                <img
+                  loading="lazy"
+                  src="icons/logo-board-mode.svg"
+                  class="size-6"
+                />
+                <span>Board Mode</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar_nav__link">
+                <img loading="lazy" src="icons/logo-saved.svg" class="size-6" />
+                <span>Saved</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar_nav__link">
+                <img
+                  loading="lazy"
+                  src="icons/logo-dropped.svg"
+                  class="size-6"
+                />
+                <span>Dropped</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <hr />
+        <div class="gap-2 text-center sidebar_footer">
+          <div>
+            <a href="#">Contact</a>
+            <a href="#">About</a>
+            <a href="#">Privacy policy</a>
+            <a href="#">Terms</a>
+          </div>
+          <small class="text-xs">© 2024 Sizemug</small>
+        </div>
+      </dialog>
+    </nav>
+    <script src="scripts/alpinejs.js"></script>
+  </body>
+</html>
