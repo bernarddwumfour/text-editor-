@@ -980,74 +980,294 @@
       <!-- sidebar -->
       <aside id="sidebar" aria-expanded="true">
         <div class="sidebar_container__bordered">
-          <div class="mobile_only_sidebar">
-            <div class="chat-search-icons">
-              <div class="header-profile">
-                <img src="./assets/user5.png" alt="" />
-                <span>
-                  <i class="fa fa-search" aria-hidden="true"></i>
-                </span>
-              </div>
+          <div class="sidebar_nav">
+            <ul data-variant="bold">
+              <li>
+                <a href="#" class="sidebar_nav__link">
+                  <svg data-icon>
+                    <use href="assets/sprite.svg#home" />
+                  </svg>
+                  <span>Home</span>
+                </a>
+              </li>
+              <li id="explore">
+                <a href="#" class="sidebar_nav__link" data-active="">
+                  <svg data-icon>
+                    <use href="assets/sprite.svg#discovery" />
+                  </svg>
+                  <span>Explore</span>
+                  <small class="sidebar_nav__badge ml-auto">New</small>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="sidebar_nav__link">
+                  <svg data-icon>
+                    <use href="assets/sprite.svg#video" />
+                  </svg>
+                  <span>Live</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="sidebar_nav__link">
+                  <svg data-icon>
+                    <use href="assets/sprite.svg#message" />
+                  </svg>
+                  <span>Chat</span>
+                  <small class="sidebar_nav__badge ml-auto">10</small>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="sidebar_nav__link">
+                  <svg data-icon>
+                    <use href="assets/sprite.svg#edit" />
+                  </svg>
+                  <span>New Paper</span>
+                </a>
+              </li>
 
-              <div class="mobile_only_title">
-                <h1>Chat</h1>
-              </div>
-
-              <div class="header-icons">
-                <span>
-                  <i class="fa-regular fa-circle-play"></i>
-                </span>
-
-                <span id="openGroupModal">
-                  <i class="fa fa-plus-square-o" aria-hidden="true"></i>
-                </span>
-              </div>
+              <li>
+                <a href="#" class="sidebar_nav__link">
+                  <svg data-icon>
+                    <use href="assets/sprite.svg#share" />
+                  </svg>
+                  <span>Following</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <hr />
+          <div class="sidebar_suggestions">
+            <h4>Suggestions</h4>
+            <ul aria-expanded="false">
+              <li>
+                <img
+                  loading="lazy"
+                  src="https://source.unsplash.com/random/50x50/?person"
+                />
+                <span> Esther Howard </span>
+                <a href="#" class="">Follow</a>
+              </li>
+              <li>
+                <img
+                  loading="lazy"
+                  src="https://source.unsplash.com/random/50x50/?person"
+                />
+                <span> Esther Howard </span>
+                <a href="#" class="">Follow</a>
+              </li>
+              <li>
+                <img
+                  loading="lazy"
+                  src="https://source.unsplash.com/random/50x50/?person"
+                />
+                <span> Darrell Steward </span>
+                <a href="#">
+                  <svg data-icon="search">
+                    <use href="./icons/sprite.svg#done" />
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <img
+                  loading="lazy"
+                  src="https://source.unsplash.com/random/50x50/?person"
+                />
+                <span> Esther Howard </span>
+                <a href="#" class="">Follow</a>
+              </li>
+              <li>
+                <img
+                  loading="lazy"
+                  src="https://source.unsplash.com/random/50x50/?person"
+                />
+                <span> Esther Howard </span>
+                <a href="#" class="">Follow</a>
+              </li>
+              <li>
+                <img
+                  loading="lazy"
+                  src="https://source.unsplash.com/random/50x50/?person"
+                />
+                <span> Esther Howard </span>
+                <a href="#" class="">Follow</a>
+              </li>
+              <li>
+                <img
+                  loading="lazy"
+                  src="https://source.unsplash.com/random/50x50/?person"
+                />
+                <span> Darrell Steward </span>
+                <a href="#">
+                  <svg data-icon="search">
+                    <use href="./icons/sprite.svg#done" />
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <img
+                  loading="lazy"
+                  src="https://source.unsplash.com/random/50x50/?person"
+                />
+                <span> Jenny Wilson </span>
+                <a href="#">Follow</a>
+              </li>
+              <li>
+                <img
+                  loading="lazy"
+                  src="https://source.unsplash.com/random/50x50/?person"
+                />
+                <span> Jenny Wilson </span>
+                <a href="#">Follow</a>
+              </li>
+              <li>
+                <img
+                  loading="lazy"
+                  src="https://source.unsplash.com/random/50x50/?person"
+                />
+                <span> Jenny Wilson </span>
+                <a href="#">Follow</a>
+              </li>
+              <li>
+                <img
+                  loading="lazy"
+                  src="https://source.unsplash.com/random/50x50/?person"
+                />
+                <span> Robert Fox </span>
+                <a href="#">Follow</a>
+              </li>
+              <li>
+                <img
+                  loading="lazy"
+                  src="https://source.unsplash.com/random/50x50/?person"
+                />
+                <span> Darrell Steward </span>
+                <a href="#">
+                  <svg data-icon="search">
+                    <use href="./icons/sprite.svg#done" />
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <img
+                  loading="lazy"
+                  src="https://source.unsplash.com/random/50x50/?person"
+                />
+                <span> Charles Gilbert </span>
+                <a href="#">Follow</a>
+              </li>
+              <li>
+                <img
+                  loading="lazy"
+                  src="https://source.unsplash.com/random/50x50/?person"
+                />
+                <span> Hettie Clark </span>
+                <a href="#">
+                  <svg data-icon="search">
+                    <use href="./icons/sprite.svg#done" />
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <img
+                  loading="lazy"
+                  src="https://source.unsplash.com/random/50x50/?person"
+                />
+                <span> Beatrice Grant </span>
+                <a href="#">
+                  <svg data-icon="search">
+                    <use href="./icons/sprite.svg#done" />
+                  </svg>
+                </a>
+              </li>
+            </ul>
+            <button id="suggestions_expand"></button>
+          </div>
+          <hr />
+          <div class="sidebar_nav">
+            <h4>Sizemug</h4>
+            <ul data-variant="base">
+              <li>
+                <a href="#" class="sidebar_nav__link">
+                  <img
+                    loading="lazy"
+                    src="icons/logo-marketplace.svg"
+                    class="size-6"
+                  />
+                  <span>Marketplace</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="sidebar_nav__link">
+                  <img
+                    loading="lazy"
+                    src="icons/logo-calender.svg"
+                    class="size-6"
+                  />
+                  <span>Calender</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="sidebar_nav__link">
+                  <img
+                    loading="lazy"
+                    src="icons/logo-board-mode.svg"
+                    class="size-6"
+                  />
+                  <span>Board Mode</span>
+                </a>
+              </li>
+              <li id="savedPage">
+                <a href="#" class="sidebar_nav__link">
+                  <img
+                    loading="lazy"
+                    src="icons/logo-saved.svg"
+                    class="size-6"
+                  />
+                  <span>Saved</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="sidebar_nav__link">
+                  <img
+                    loading="lazy"
+                    src="icons/logo-dropped.svg"
+                    class="size-6"
+                  />
+                  <span>Dropped</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <hr />
+          <div class="sidebar-section" >
+            <div class="black-box" style="background: black; display: flex;color: orange;font-size: .75rem;padding: 1rem;border-radius: 1rem;">
+              <img src="assets/side-bar-1.svg"  style="width: 30px;height: 30px;"/>
+              <p>
+                Get SizemugCoins <br />
+                Use for purchases & send
+              </p>
+              <img src="assets/side-bar-2.svg"  style="width: 30px;height: 30px;"/>
             </div>
           </div>
-          <div>
-            <div class="tabs">
-              <button class="tab-link active" data-tab="all">All</button>
-              <button class="tab-link" data-tab="unread">Unread</button>
-              <button class="tab-link" data-tab="favourites">Favourites</button>
-              <button class="tab-link" data-tab="groups">Groups</button>
-            </div>
+          <div class="help_desk">
+            <h3 class="font-semibold">Help Desk</h3>
           </div>
-
-          <div class="chat-list" id="chat-list"></div>
-          <div>
-            <div class="group-container">
-              <div class="footer">
-                <div>
-                  <div class="light-mode-toggle">
-                    <label class="switch">
-                      <input type="checkbox" id="lightModeToggle" />
-                      <span class="slider round"></span>
-                    </label>
-                    <span class="toggle-label">Light mode</span>
-                  </div>
-
-                  <div class="footer-box">
-                    <div class="crypto-icon">
-                      <i class="fa fa-database" aria-hidden="true"></i>
-                    </div>
-                    <div class="crypto-text">
-                      Get Sizemug Coins Use for purchases & send
-                    </div>
-                    <button class="crypto-arrow">
-                      <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                    </button>
-                  </div>
-                </div>
-
-                <div class="footer-text">
-                  <p>Contact About Privacy policy Terms</p>
-                  <span>© 2024 Sizemug</span>
-                </div>
-              </div>
+          <div class="sidebar_footer">
+            <div>
+              <a href="#">Contact</a>
+              <a href="#">About</a>
+              <a href="#">Privacy policy</a>
+              <a href="#">Terms</a>
+              <a href="#">Help</a>
+              <a href="#">security</a>
+              <a href="#">Community</a>
             </div>
+
+            <small class="text-xs">© 2024 Sizemug</small>
           </div>
         </div>
       </aside>
+      
       <main class="chat-layout">
         <div class="profile-component" id="profile-component">
           <div class="img-icon" id="close-chat">

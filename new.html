@@ -22,7 +22,7 @@
       href="/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css"
     />
     <!-- external scripts -->
-    <script src="./jquery.js"></script>
+    <script src="jquery.js"></script>
     <script src="./script.js"></script>
     <!-- stylesheets -->
     <link rel="stylesheet" href="./converted.css" />
@@ -127,60 +127,841 @@
         <div class="flex gap-2 items-center">
           <button class="header_action__button hidden md:flex">
             <svg data-icon="create-fill" class="!size-8">
-              <use href="./icons/sprite.svg#create-fill" />
+              <use href="assets/sprite.svg#create-fill" />
             </svg>
             <i class="tooltip">Create</i>
           </button>
+          <button
+            class="header_action__button"
+            @click="push__top='messages'"
+            aria-haspopup="false"
+          >
+            <svg data-icon="chat-fill" class="!size-8">
+              <use href="assets/sprite.svg#chat-fill" />
+            </svg>
+            <i class="tooltip">Message</i>
+          </button>
+          <button
+            class="header_action__button"
+            @click="push__top='notification'"
+          >
+            <div
+              class="bg-red-500 rounded-full size-1.5 absolute top-2 right-2.5 ring-2 ring-white"
+            ></div>
+            <svg data-icon="bell-fill" class="!size-8">
+              <use href="assets/sprite.svg#bell-fill" class="not-pop" />
+            </svg>
+            <i class="tooltip">Notifications</i>
+          </button>
+          <!--top-message-->
+          <div
+            x-transition:enter="transition ease-out duration-150"
+            x-transition:enter-start="opacity-60 transform scale-95"
+            x-transition:enter-end="opacity-100 transform scale-100"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-end="opacity-0 transform scale-95"
+            x-transition:leave-start="opacity-100 x-translate-100 transform scale-100"
+            x-show="push__top=='messages'"
+            @click.away="push__top=''"
+            aria-haspopup="false"
+            class="top-message modal-wrapper z-52"
+          >
+            <div class="top-message-title">
+              <span class="material-symbols-outlined back" @click="push__top=''"
+                >chevron_left</span
+              >
+              <span class="label">Messages</span>
+            </div>
+            <div class="top-message-content">
+              <div class="top-message-items thin-scroll">
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-red"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-red"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-blue"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-red"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-orange"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-red"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-red"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-red"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-blue"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-orange"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-orange"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-red"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-green"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-green"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-green"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-green"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developer, Using React, Laravel,
+                      Codeigniter, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-red"></span>
+                  </div>
+                </a>
+                <a class="top-message-item" href="#">
+                  <div class="sender__avatar">
+                    <img src="./assets/user1.png" alt="sender avatar" />
+                  </div>
+                  <div class="notify-sender-message">
+                    <div class="sender__name__time">
+                      <div class="sender__name">West Warren</div>
+                      <div class="dot__separator">
+                        <span class="dot__separator_sm bg-gray-300"></span>
+                      </div>
+                      <div class="send__time">Just now</div>
+                    </div>
+                    <p class="message__slug ellipsis">
+                      Hello, I'm Full stack developers, Using React, Laravel,
+                      Codeigniter,, Node etc.
+                    </p>
+                  </div>
+                  <div class="message__indicator">
+                    <span class="ind-blue"></span>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="top-message-footer">
+              <a href="#">
+                <span>See all messages</span>
+                <i class="material-symbols-outlined">arrow_right_alt</i>
+              </a>
+            </div>
+          </div>
+
+          <!-- top notification -->
+          <div
+            x-show="push__top=='notification'"
+            x-transition:enter="transition ease-out duration-150"
+            x-transition:enter-start="opacity-60 transform scale-95"
+            x-transition:enter-end="opacity-100 transform scale-100"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-end="opacity-0 transform scale-95"
+            x-transition:leave-start="opacity-100 x-translate-100 transform scale-100"
+            @click.away="push__top=''"
+            class="app_notification"
+            style=""
+          >
+            <header class="app_notification_header">
+              <div class="app_notification_header_title">
+                <span
+                  class="material-symbols-outlined back"
+                  @click="push__top=''"
+                  >chevron_left</span
+                >
+                <span class="label">Notifications</span>
+              </div>
+              <div class="app_notification_header_tab">
+                <label
+                  class="inline-tab"
+                  @click="notification_tab='notifications'"
+                >
+                  <input
+                    type="radio"
+                    x-bind:checked="notification_tab=='notifications'"
+                    name="notification_tab"
+                    hidden=""
+                  />
+                  <div>Notifications</div>
+                </label>
+                <label class="inline-tab" @click="notification_tab='requests'">
+                  <input
+                    type="radio"
+                    x-bind:checked="notification_tab=='requests'"
+                    name="notification_tab"
+                    hidden=""
+                    checked="checked"
+                  />
+                  <div>Requests</div>
+                </label>
+              </div>
+            </header>
+            <div class="app_notification_body">
+              <ul
+                class="app_notification_body_items y-thin-scroll"
+                x-show="notification_tab=='notifications'"
+                style="display: none"
+              >
+                <li>
+                  <img src="./assets/user1.png" alt="avater" />
+                  <div class="app_notification_m_content">
+                    <ul class="notification_">
+                      <li class="notification_sender">
+                        <span class="sender__ ellipsis"
+                          >Micrsoft 365 Develop</span
+                        >
+                        <span class="dot__separator"
+                          ><small class="dot__separator_sm ind-gray"></small>
+                        </span>
+                        <span class="send__time">13 hours ago</span>
+                      </li>
+                      <li class="notification_message ellipsis">
+                        Microsoft 365 Developer Program | View in browser
+                        Discover the transfomation
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <img src="./assets/user2.png" alt="avater" />
+                  <div class="app_notification_m_content">
+                    <ul class="notification_">
+                      <li class="notification_sender">
+                        <span class="sender__ ellipsis"
+                          >Facebool 2 comment</span
+                        >
+                        <span class="dot__separator"
+                          ><small class="dot__separator_sm ind-gray"></small>
+                        </span>
+                        <span class="send__time">5 day ago</span>
+                      </li>
+                      <li class="notification_message ellipsis">
+                        Noticias do FC Barcelona and Barcatime TV posted.
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <img src="./assets/user3.png" alt="avater" />
+                  <div class="app_notification_m_content">
+                    <ul class="notification_">
+                      <li class="notification_sender">
+                        <span class="sender__ ellipsis">Snaptube</span>
+                        <span class="dot__separator"
+                          ><small class="dot__separator_sm ind-gray"></small>
+                        </span>
+                        <span class="send__time">1 min ago</span>
+                      </li>
+                      <li class="notification_message ellipsis">
+                        New version is availabl
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+              <ul
+                class="app_notification_body_items req"
+                x-show="notification_tab=='requests'"
+                style=""
+              >
+                <li>
+                  <img src="./assets/user1.png" alt="avater" />
+                  <div class="app_notification_m_content">
+                    <ul class="notification_">
+                      <li class="notification_sender">
+                        <span class="sender__ ellipsis">Musa Yussuf</span>
+                        <span class="dot__separator"
+                          ><small class="dot__separator_sm ind-gray"></small>
+                        </span>
+                        <span class="send__time">2 day ago</span>
+                      </li>
+                      <li class="notification_message ellipsis">
+                        I sent you message, let s have meeting by 12pm
+                      </li>
+                    </ul>
+                  </div>
+                  <div
+                    class="notification_follow_back"
+                    x-data="{follow:false, confirm:false}"
+                  >
+                    <button
+                      class="following-link"
+                      x-show="!follow"
+                      @click="follow=!follow"
+                      x-text="confirm ? 'Following' : 'Follow back'"
+                      style="display: none"
+                    >
+                      Follow back
+                    </button>
+                    <div class="confirm-following" x-show="follow" style="">
+                      <div class="confirm-following-group">
+                        <button
+                          title="cancel"
+                          @click="()=>{follow=!follow;confirm=false}"
+                          aria-pressed="false"
+                          class="confirm-cancel material-symbols-outlined"
+                        >
+                          close
+                        </button>
+                        <button
+                          title="confirm"
+                          @click="()=>{follow=!follow;confirm=true}"
+                          aria-pressed="false"
+                          class="confirm-done material-symbols-outlined text-green-500 transition-all hover:rounded-full hover:bg-gray-200"
+                        >
+                          check
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <img src="./assets/user2.png" alt="avater" />
+                  <div class="app_notification_m_content">
+                    <ul class="notification_">
+                      <li class="notification_sender">
+                        <span class="sender__ ellipsis"
+                          >Sky News</span
+                        >
+                        <span class="dot__separator"
+                          ><small class="dot__separator_sm ind-gray"></small>
+                        </span>
+                        <span class="send__time">2 min ago</span>
+                      </li>
+                      <li class="notification_message ellipsis">
+                        BREAKING: Kylian Mbappe has join Real Madrid
+                      </li>
+                    </ul>
+                  </div>
+                  <div
+                    class="notification_follow_back"
+                    x-data="{follow:false, confirm:false}"
+                  >
+                    <button
+                      class="following-link"
+                      x-show="!follow"
+                      @click="follow=!follow"
+                      x-text="confirm ? 'Following' : 'Follow back'"
+                    >
+                      Follow back
+                    </button>
+                    <div
+                      class="confirm-following"
+                      x-show="follow"
+                      style="display: none"
+                    >
+                      <div class="confirm-following-group">
+                        <button
+                          title="cancel"
+                          @click="()=>{follow=!follow;confirm=false}"
+                          aria-pressed="false"
+                          class="confirm-cancel material-symbols-outlined"
+                        >
+                          close
+                        </button>
+                        <button
+                          title="confirm"
+                          @click="()=>{follow=!follow;confirm=true}"
+                          aria-pressed="false"
+                          class="confirm-done material-symbols-outlined text-green-500 transition-all hover:rounded-full hover:bg-gray-200"
+                        >
+                          check
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <img src="./assets/user3.png" alt="avater" />
+                  <div class="app_notification_m_content">
+                    <ul class="notification_">
+                      <li class="notification_sender">
+                        <span class="sender__ ellipsis">Oladimeji Akeem</span>
+                        <span class="dot__separator"
+                          ><small class="dot__separator_sm ind-gray"></small>
+                        </span>
+                        <span class="send__time">2 day ago</span>
+                      </li>
+                      <li class="notification_message ellipsis">
+                        Atilola Waris was tagged in a post
+                      </li>
+                    </ul>
+                  </div>
+                  <div
+                    class="notification_follow_back"
+                    x-data="{follow:false, confirm:false}"
+                  >
+                    <button
+                      class="following-link"
+                      x-show="!follow"
+                      @click="follow=!follow"
+                      x-text="confirm ? 'Following' : 'Follow back'"
+                    >
+                      Follow back
+                    </button>
+                    <div
+                      class="confirm-following"
+                      x-show="follow"
+                      style="display: none"
+                    >
+                      <div class="confirm-following-group">
+                        <button
+                          title="cancel"
+                          @click="()=>{follow=!follow;confirm=false}"
+                          aria-pressed="false"
+                          class="confirm-cancel material-symbols-outlined"
+                        >
+                          close
+                        </button>
+                        <button
+                          title="confirm"
+                          @click="()=>{follow=!follow;confirm=true}"
+                          aria-pressed="false"
+                          class="confirm-done material-symbols-outlined text-green-500 transition-all hover:rounded-full hover:bg-gray-200"
+                        >
+                          check
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <img src="./assets/user4.png" alt="avater" />
+                  <div class="app_notification_m_content">
+                    <ul class="notification_">
+                      <li class="notification_sender">
+                        <span class="sender__ ellipsis"
+                          >Dhikr Before Sleep</span
+                        >
+                        <span class="dot__separator"
+                          ><small class="dot__separator_sm ind-gray"></small>
+                        </span>
+                        <span class="send__time">2 hours ago</span>
+                      </li>
+                      <li class="notification_message ellipsis">
+                        Do you wish to set a reminder
+                      </li>
+                    </ul>
+                  </div>
+                  <div
+                    class="notification_follow_back"
+                    x-data="{follow:false, confirm:false}"
+                  >
+                    <button
+                      class="following-link"
+                      x-show="!follow"
+                      @click="follow=!follow"
+                      x-text="confirm ? 'Following' : 'Follow back'"
+                    >
+                      Follow back
+                    </button>
+                    <div
+                      class="confirm-following"
+                      x-show="follow"
+                      style="display: none"
+                    >
+                      <div class="confirm-following-group">
+                        <button
+                          title="cancel"
+                          @click="()=>{follow=!follow;confirm=false}"
+                          aria-pressed="false"
+                          class="confirm-cancel material-symbols-outlined"
+                        >
+                          close
+                        </button>
+                        <button
+                          title="confirm"
+                          @click="()=>{follow=!follow;confirm=true}"
+                          aria-pressed="false"
+                          class="confirm-done material-symbols-outlined text-green-500 transition-all hover:rounded-full hover:bg-gray-200"
+                        >
+                          check
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <img src="./assets/user5.png" alt="avater" />
+                  <div class="app_notification_m_content">
+                    <ul class="notification_">
+                      <li class="notification_sender">
+                        <span class="sender__ ellipsis">Sizemug</span>
+                        <span class="dot__separator"
+                          ><small class="dot__separator_sm ind-gray"></small>
+                        </span>
+                        <span class="send__time">2 day ago</span>
+                      </li>
+                      <li class="notification_message ellipsis">
+                        Sizemug sent you a friend request
+                      </li>
+                    </ul>
+                  </div>
+                  <div
+                    class="notification_follow_back"
+                    x-data="{follow:false, confirm:false}"
+                  >
+                    <button
+                      class="following-link"
+                      x-show="!follow"
+                      @click="follow=!follow"
+                      x-text="confirm ? 'Following' : 'Follow back'"
+                    >
+                      Follow back
+                    </button>
+                    <div
+                      class="confirm-following"
+                      x-show="follow"
+                      style="display: none"
+                    >
+                      <div class="confirm-following-group">
+                        <button
+                          title="cancel"
+                          @click="()=>{follow=!follow;confirm=false}"
+                          aria-pressed="false"
+                          class="confirm-cancel material-symbols-outlined"
+                        >
+                          close
+                        </button>
+                        <button
+                          title="confirm"
+                          @click="()=>{follow=!follow;confirm=true}"
+                          aria-pressed="false"
+                          class="confirm-done material-symbols-outlined text-green-500 transition-all hover:rounded-full hover:bg-gray-200"
+                        >
+                          check
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="app_notification_footer">
+              <a href="#">
+                <span>See all notifications</span>
+                <i class="material-symbols-outlined">arrow_right_alt</i>
+              </a>
+            </div>
+          </div>
           <button class="header_action__button flex md:hidden">
             <svg data-icon="bell-fill" class="!size-7">
               <use href="./icons/sprite.svg#search" class="stroke-[3]" />
             </svg>
             <i class="tooltip">Search</i>
-          </button>
-          <button class="header_action__button">
-            <div
-              class="bg-red-500 rounded-full size-1.5 absolute top-2 right-2.5 ring-2 ring-white"
-            ></div>
-            <svg data-icon="bell-fill" class="!size-8">
-              <use href="./icons/sprite.svg#bell-fill" />
-            </svg>
-            <i class="tooltip">Notifications</i>
-          </button>
-          <button class="header_action__button">
-            <svg data-icon="chat-fill" class="!size-8">
-              <use href="./icons/sprite.svg#chat-fill" />
-            </svg>
-            <i class="tooltip">Message</i>
-          </button>
-          <button class="header_action__button flex md:hidden">
-            <div class="header-menu" id="header-menu">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M5 7H19"
-                  stroke="#33363F"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                />
-                <path
-                  d="M5 12H19"
-                  stroke="#33363F"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                />
-                <path
-                  d="M5 17H19"
-                  stroke="#33363F"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                />
-              </svg>
-            </div>
           </button>
         </div>
         <img
@@ -196,22 +977,22 @@
 
     <div class="content_area" id="content_area">
       <!-- sidebar -->
-      <aside class="sidebar" id="sidebar" aria-expanded="true">
+      <aside id="sidebar" aria-expanded="true">
         <div class="sidebar_container__bordered">
           <div class="sidebar_nav">
             <ul data-variant="bold">
               <li>
                 <a href="#" class="sidebar_nav__link">
                   <svg data-icon>
-                    <use href="./icons/sprite.svg#home" />
+                    <use href="assets/sprite.svg#home" />
                   </svg>
                   <span>Home</span>
                 </a>
               </li>
-              <li>
-                <a href="#" class="sidebar_nav__link">
+              <li id="explore">
+                <a href="#" class="sidebar_nav__link" data-active="">
                   <svg data-icon>
-                    <use href="./icons/sprite.svg#discovery" />
+                    <use href="assets/sprite.svg#discovery" />
                   </svg>
                   <span>Explore</span>
                   <small class="sidebar_nav__badge ml-auto">New</small>
@@ -220,7 +1001,7 @@
               <li>
                 <a href="#" class="sidebar_nav__link">
                   <svg data-icon>
-                    <use href="./icons/sprite.svg#video" />
+                    <use href="assets/sprite.svg#video" />
                   </svg>
                   <span>Live</span>
                 </a>
@@ -228,24 +1009,25 @@
               <li>
                 <a href="#" class="sidebar_nav__link">
                   <svg data-icon>
-                    <use href="./icons/sprite.svg#message" />
+                    <use href="assets/sprite.svg#message" />
                   </svg>
                   <span>Chat</span>
                   <small class="sidebar_nav__badge ml-auto">10</small>
                 </a>
               </li>
               <li>
-                <a href="#" class="sidebar_nav__link" data-active>
+                <a href="#" class="sidebar_nav__link">
                   <svg data-icon>
-                    <use href="./icons/sprite.svg#edit" />
+                    <use href="assets/sprite.svg#edit" />
                   </svg>
                   <span>New Paper</span>
                 </a>
               </li>
+
               <li>
                 <a href="#" class="sidebar_nav__link">
                   <svg data-icon>
-                    <use href="./icons/sprite.svg#share" />
+                    <use href="assets/sprite.svg#share" />
                   </svg>
                   <span>Following</span>
                 </a>
@@ -263,6 +1045,78 @@
                 />
                 <span> Esther Howard </span>
                 <a href="#" class="">Follow</a>
+              </li>
+              <li>
+                <img
+                  loading="lazy"
+                  src="https://source.unsplash.com/random/50x50/?person"
+                />
+                <span> Esther Howard </span>
+                <a href="#" class="">Follow</a>
+              </li>
+              <li>
+                <img
+                  loading="lazy"
+                  src="https://source.unsplash.com/random/50x50/?person"
+                />
+                <span> Darrell Steward </span>
+                <a href="#">
+                  <svg data-icon="search">
+                    <use href="./icons/sprite.svg#done" />
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <img
+                  loading="lazy"
+                  src="https://source.unsplash.com/random/50x50/?person"
+                />
+                <span> Esther Howard </span>
+                <a href="#" class="">Follow</a>
+              </li>
+              <li>
+                <img
+                  loading="lazy"
+                  src="https://source.unsplash.com/random/50x50/?person"
+                />
+                <span> Esther Howard </span>
+                <a href="#" class="">Follow</a>
+              </li>
+              <li>
+                <img
+                  loading="lazy"
+                  src="https://source.unsplash.com/random/50x50/?person"
+                />
+                <span> Esther Howard </span>
+                <a href="#" class="">Follow</a>
+              </li>
+              <li>
+                <img
+                  loading="lazy"
+                  src="https://source.unsplash.com/random/50x50/?person"
+                />
+                <span> Darrell Steward </span>
+                <a href="#">
+                  <svg data-icon="search">
+                    <use href="./icons/sprite.svg#done" />
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <img
+                  loading="lazy"
+                  src="https://source.unsplash.com/random/50x50/?person"
+                />
+                <span> Jenny Wilson </span>
+                <a href="#">Follow</a>
+              </li>
+              <li>
+                <img
+                  loading="lazy"
+                  src="https://source.unsplash.com/random/50x50/?person"
+                />
+                <span> Jenny Wilson </span>
+                <a href="#">Follow</a>
               </li>
               <li>
                 <img
@@ -361,7 +1215,7 @@
                   <span>Board Mode</span>
                 </a>
               </li>
-              <li>
+              <li id="savedPage">
                 <a href="#" class="sidebar_nav__link">
                   <img
                     loading="lazy"
@@ -384,17 +1238,35 @@
             </ul>
           </div>
           <hr />
-          <div class="gap-2 text-center sidebar_footer">
+          <div class="sidebar-section" >
+            <div class="black-box" style="background: black; display: flex;color: orange;font-size: .75rem;padding: 1rem;border-radius: 1rem;">
+              <img src="assets/side-bar-1.svg"  style="width: 30px;height: 30px;"/>
+              <p>
+                Get SizemugCoins <br />
+                Use for purchases & send
+              </p>
+              <img src="assets/side-bar-2.svg"  style="width: 30px;height: 30px;"/>
+            </div>
+          </div>
+          <div class="help_desk">
+            <h3 class="font-semibold">Help Desk</h3>
+          </div>
+          <div class="sidebar_footer">
             <div>
               <a href="#">Contact</a>
               <a href="#">About</a>
               <a href="#">Privacy policy</a>
               <a href="#">Terms</a>
+              <a href="#">Help</a>
+              <a href="#">security</a>
+              <a href="#">Community</a>
             </div>
+
             <small class="text-xs">© 2024 Sizemug</small>
           </div>
         </div>
       </aside>
+      
       <section class="main-content">
         <aside>
           <div class="sidebar_container" id="inside-nav">
@@ -912,5 +1784,6 @@
         </li>
       </ul>
     </nav>
+    <script src="scripts/alpinejs.js"></script>
   </body>
 </html>

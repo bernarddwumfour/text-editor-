@@ -17,9 +17,13 @@ class Modal {
   }
 
   #cloneContent = () => {
-    let clone = this.#modalcontent.content.cloneNode(true);
+    let clone
+    // console.log(this.#modalcontent.tagName)
+    // debugger
+    if(this.#modalcontent.tagName == "TEMPLATE"){
+      clone = this.#modalcontent.content.cloneNode(true);
 
-    clone.querySelector('.modalCancel') &&
+      clone.querySelector('.modalCancel') &&
       clone.querySelector('.modalCancel').addEventListener('click', () => {
         this.#modal.style.display = 'none';
       });
@@ -29,8 +33,27 @@ class Modal {
     };
 
     action();
-
     this.#modal.replaceChildren(clone);
+
+    }else{
+      clone = this.#modalcontent.querySelector("div")
+      clone.style.display = "block"
+      console.log(clone)
+
+      this.#modal.replaceChildren(clone);
+
+      clone.querySelector('.modalCancel') &&
+      clone.querySelector('.modalCancel').addEventListener('click', () => {
+        this.#modal.style.display = 'none';
+      });
+
+    }
+
+
+
+   
+
+    
 
     // console.log(modal)
   };
