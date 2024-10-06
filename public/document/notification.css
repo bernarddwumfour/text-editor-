@@ -2221,6 +2221,7 @@ svg[data-icon] {
 }
 .content_area main {
   overflow: hidden;
+  overflow-y: scroll;
   padding: 1.5rem;
 }
 

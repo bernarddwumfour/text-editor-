@@ -34,35 +34,41 @@
       rel="stylesheet"
     />
     <!-- external scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="jquery.js"></script>
     <script src="./script.js"></script>
+    <script src="/document/script.js"  type="module"></script>
+
     <!-- stylesheets -->
-    <!-- <link rel="stylesheet" href="./converted.css" /> -->
-    <link rel="stylesheet" href="./paper.css" />
-    <!-- <link rel="stylesheet" href="styles/output.css" /> -->
+
     <link rel="import" href="./icons/sprite.svg" />
-    
+    <link rel="stylesheet" href="./paper.css" />
     <link rel="stylesheet" href="/document/notification.css" />
     <link rel="stylesheet" href="/document/notification_page.css" />
+    <link rel="stylesheet" href="./converted.css" />
+
 
     <style>
-      .confirm-cancel,
+      /* .confirm-cancel,
       .confirm-done {
         width: 24px;
         height: 24px;
         min-width: 24px !important;
         min-height: 24px !important;
-      }
+      } */
+
     </style>
   </head>
 
   <body
-    x-data="{
+
+  x-data="{
     notification_tab:'notifications', push__top:''
   }"
+  
   >
     <!-- header starts -->
-    <nav class="header">
+    <nav class="header" style="padding:  1rem !important;">
       <!-- app-logo -->
       <div class="header_logo">
         <button class="sidebar_trigger header_action__button !-ml-4 !mr-1">
@@ -163,7 +169,8 @@
               </svg>
               <i class="tooltip">Create</i>
             </button>
-            <button id="Message-btn" class="header_action__button">
+            <button id="Message-btn" class="header_action__button" @click="push__top='messages'"
+            aria-haspopup="false">
               <svg data-icon="chat-fill" class="!size-8">
                 <use href="/assets/sprite.svg#chat-fill" />
               </svg>
@@ -742,7 +749,7 @@
           </div>
         </div>
         <div class="top-message-footer">
-          <a href="#">
+          <a href="/chat.html">
             <span>See all messages</span>
             <i class="material-symbols-outlined">arrow_right_alt</i>
           </a>
@@ -1331,7 +1338,7 @@
           </a>
         </div>
       </div>
-    </nav>
+    <!-- </nav> -->
 
     <div class="content_area" id="content_area">
       <!-- sidebar -->
@@ -2313,9 +2320,6 @@
 
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
     <script src="./scripts/main.js" type="module"></script>
-    <script src="./scripts/docs.js" type="module"></script>
-    <script src="/document/script.js"  type="module"></script>
-    <script src="./scripts/functionality.js" type="module"></script>
     <script src="/document/notification.js" type="module"></script>
   </body>
 </html>

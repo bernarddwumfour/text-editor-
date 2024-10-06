@@ -25,22 +25,32 @@
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet" />
+
     <!-- external scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="jquery.js"></script>
     <script src="./script.js"></script>
+    <script src="/document/script.js"  type="module"></script>
+
+    
     
     <!-- stylesheets -->
-    <!-- <link rel="stylesheet" href="./converted.css" /> -->
-    <link rel="stylesheet" href="./paper.css" />
+    <link rel="stylesheet" href="./converted.css" />
     <link rel="import" href="./icons/sprite.svg" />
 
+    <link rel="stylesheet" href="/document/converted.css" />
+    <link rel="stylesheet" href="./paper.css" />
     <link rel="stylesheet" href="/document/notification.css" />
     <link rel="stylesheet" href="/document/notification_page.css" />
   </head>
 
-  <body>
+  <body
+  x-data="{
+    notification_tab:'notifications', push__top:''
+  }"
+  >
     <!-- header starts -->
-    <nav class="header">
+    <nav class="header" style="padding: 1rem !important;">
       <!-- app-logo -->
       <div class="header_logo">
         <button class="sidebar_trigger header_action__button !-ml-4 !mr-1">
@@ -132,7 +142,8 @@
             </svg>
             <i class="tooltip">Create</i>
           </button>
-          <button id="Message-btn" class="header_action__button">
+          <button id="Message-btn" class="header_action__button" @click="push__top='messages'"
+          aria-haspopup="false">
             <svg data-icon="chat-fill" class="!size-8">
               <use href="/assets/sprite.svg#chat-fill" />
             </svg>
@@ -2041,14 +2052,9 @@
       </ul>
     </nav>
     <script src="scripts/alpinejs.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="./scripts/main.js" type="module"></script>
     <script src="./scripts/docs.js" type="module"></script>
-    <script src="/document/script.js" type="module"></script>
-    <!-- <script src="./scripts/functionality.js" type="module"></script> -->
     <script src="/document/notification.js" type="module"></script>
   </body>
 </html>
