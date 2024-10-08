@@ -1348,8 +1348,8 @@ svg[data-icon] {
 
 .app_notification_body_items > li img {
   max-height: 2.5rem;
-  min-height: 2.5rem;
-  min-width: 2.5rem;
+  min-height: 1.85rem;
+  min-width: 1.85rem;
   max-width: 2.5rem;
   border-radius: 0.375rem;
   -o-object-fit: cover;
