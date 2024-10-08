@@ -2408,6 +2408,11 @@
             src="./views/docs.html"
             data-page-size="A4">
           </iframe>
+          <iframe
+            class="editorIframe"
+            src="./views/docs.html"
+            data-page-size="A4">
+          </iframe>
         </main>
         <nav
           class="grid h-8 grid-cols-[auto,1fr,auto] items-center gap-4 border-t border-gray-300 bg-gray-100 px-6 *:text-sm *:leading-none *:text-gray-500 print:hidden">
@@ -3216,7 +3221,7 @@
         </div>
 
         <!-- Close Button  -->
-        <div class="post-close modalCancel">
+        <div class="post-close modalCancel" style="position: absolute;top : 1rem ; right : 1rem ; z-index: 100;">
           <span
             class="close-pt close-popup"
             data-trigger=".user-post-details"
@@ -3331,22 +3336,22 @@
 
     <!-- template: social post -->
     <template id="social_post">
-      <article class="social_post">
-        <a href="#">
+      <article class="social_post" style="cursor : pointer">
+        <div>
           <img
             class="social_post__image"
             height="300"
             width="450"
             loading="lazy"
             fetchpriority="low" />
-        </a>
+        </div>
         <div class="social_post__author">
           <img loading="lazy" fetchpriority="low" />
           <h5></h5>
         </div>
-        <a href="#">
+        <div>
           <h4 class="social_post__title"></h4>
-        </a>
+        </div>
         <div class="social_post__metrics">
           <span class="social_post__date">6 days ago</span>
           <span class="social_post__views">84 views</span>

@@ -1860,15 +1860,15 @@ svg[data-icon] {
     padding: 0px;
     
 }
-
+/* 
 .confirm-cancel,
 .confirm-done {
   width: 24px;
   height: 24px;
   min-width: 24px !important;
   min-height: 24px !important;
-}
-/* 
+} */
+
 .confirm-cancel {
     width: 2rem;
     height: 2rem;
@@ -1890,4 +1890,4 @@ svg[data-icon] {
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
 }
- */
+

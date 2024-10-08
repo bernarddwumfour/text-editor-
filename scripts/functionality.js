@@ -5,7 +5,11 @@ import './_modals';
 const undo = document.getElementsByClassName('undo')[0];
 const redo = document.getElementsByClassName('redo')[0];
 const editor = document.getElementsByClassName('editor')[0];
-const iframe = document.getElementsByClassName('editorIframe')[0];
+
+let iframe = document.querySelectorAll('editorIframe');
+for (let i = 0; i < iframe.length; i++) {
+  iframe = iframe[i]
+}
 const copy = document.getElementsByClassName('copy')[0];
 const paste = document.getElementsByClassName('paste')[0];
 const cut = document.getElementsByClassName('cut')[0];
@@ -237,7 +241,6 @@ iframe.addEventListener('load', () => {
   tryInitializeEditor();
 });
 
-
 // Wait for the iframe to load before initializing
 // document.addEventListener('load',()=>{
 // iframe &&
@@ -263,8 +266,6 @@ function execCommandInIframe(command, value = null) {
   }
   editorDoc.execCommand(command, false, value);
 }
-
-
 
 bold &&
   bold.addEventListener('click', () => {
@@ -438,7 +439,7 @@ fontFamily &&
 
 quotation &&
   quotation.addEventListener('click', () => {
-    execCommandInIframe('formatBlock', "blockquote");
+    execCommandInIframe('formatBlock', 'blockquote');
   });
 
 horizontalLine &&
@@ -461,7 +462,7 @@ wrapParagraph &&
     // }
     // iframe.contentWindow.focus();
     // execCommandInIframe('formatBlock', 'p');
-    execCommandInIframe('insertParagraph','p');
+    execCommandInIframe('insertParagraph', 'p');
   });
 
 preview &&
@@ -740,52 +741,44 @@ const convertFileType = () => {
 };
 
 const addNewFile = () => {
+
   const editor = getEditorElement();
-  const template = document.querySelector('#addNewFileModal');
-  let fileName = document.querySelector('#documentName');
+  // Split overflowing content function
+  function splitContent(editor) {
+    let content = editor.innerHTML;
+    let contentClone = editor.cloneNode(true);
+    let text = contentClone.innerHTML;
 
-  let clone = template.content.cloneNode(true);
-  if (editor.innerHTML != '') {
-    clone.querySelectorAll('button')[1].style.display = 'block';
-    clone.querySelectorAll('button')[1].addEventListener('click', () => {
-      editor.innerHTML = '';
-      fileName.innerHTML = 'document-01';
-      closeModal();
-      // alert("You Clicked Yes")
-    });
+    // Here, you can improve this to split at specific points, like paragraph ends or line breaks
+    while (contentClone.scrollHeight > contentClone.clientHeight) {
+      text = text.slice(0, -1); // Remove characters from the end to fit in the current page
+      contentClone.innerHTML = text;
+    }
 
-    clone.querySelectorAll('button')[0].addEventListener('click', () => {
-      // Save file before creating a new one
-      // SAVE FILE HERE
-      alert('Saving file');
-      editor.innerHTML = '';
-      fileName.innerHTML = 'document-01';
-      // alert("You Clicked Yes")
-      closeModal();
-    });
-  } else {
-    clone.querySelector('p').innerHTML = 'Create a New File <br/> <br/>';
-    clone.querySelectorAll('button')[1].style.display = 'none';
-
-    clone.querySelectorAll('button')[0].addEventListener('click', () => {
-      alert('clicked');
-      editor.innerHTML = '';
-      fileName.innerHTML = 'document-01';
-      // alert("You Clicked Yes")
-      closeModal();
-    });
+    editor.innerHTML = contentClone.innerHTML;
+    return content.slice(contentClone.innerHTML.length); // Return the overflowed content
   }
 
-  toggleModalContent(clone);
-  openModal();
-  let actionButton = clone.querySelector('.action');
-  // actionButton.addEventListener('click', () => {
-  //   alert('clicked');
-  //   //Button action goes here
+  if (editor.scrollHeight > editor.clientHeight) {
+  alert("overflowing")
 
-  //   closeModal();
-  // });
+    // Create a new page when content overflows
+    const newPage = document.createElement('iframe');
+    newPage.classList.add('page');
+    newPage.contentEditable = 'true';
+
+    // Move overflowing content into the new page
+    const overflowingContent = splitContent(editor);
+    newPage.innerHTML = overflowingContent;
+
+    // Append the new page to the editor container
+    const container = document.querySelector('editorIframe');
+    container.appendChild(newPage);
+  }
 };
+
+getEditorElement().addEventListener('input', addNewFile);
+
 
 // Download as PDF with preserved formatting
 const downloadPDF = (editor) => {
@@ -1002,7 +995,6 @@ modalCancel &&
     closeModal();
   });
 
-
 class Pagemodal {
   // #backdrop = document.getElementById('#modal');
   #button;
@@ -1047,49 +1039,47 @@ class Pagemodal {
         // alert("Add graph")
         let actionButton = clone.querySelectorAll('.action')[0];
         let graphType = clone.querySelector('div').dataset.graph;
-        let labels = clone.querySelectorAll("input")[0]
-        let values = clone.querySelectorAll("input")[1]
-        let label = clone.querySelectorAll("input")[2]
+        let labels = clone.querySelectorAll('input')[0];
+        let values = clone.querySelectorAll('input')[1];
+        let label = clone.querySelectorAll('input')[2];
         const editor = getEditorElement();
-
-        
 
         // console.log(graphType);
         actionButton.addEventListener('click', function () {
-          labels = labels.value.split(",")
-          values = values.value.split(",")
-          let backgroundColor = 'rgb(153, 102, 255)'
+          labels = labels.value.split(',');
+          values = values.value.split(',');
+          let backgroundColor = 'rgb(153, 102, 255)';
           const colors = [
-            'rgb(255, 99, 132)',  // Soft Red
-            'rgb(75, 192, 192)',  // Teal
-            'rgb(54, 162, 235)',  // Light Blue
-            'rgb(255, 206, 86)',  // Soft Yellow
+            'rgb(255, 99, 132)', // Soft Red
+            'rgb(75, 192, 192)', // Teal
+            'rgb(54, 162, 235)', // Light Blue
+            'rgb(255, 206, 86)', // Soft Yellow
             'rgb(153, 102, 255)', // Light Purple
-            'rgb(255, 159, 64)',  // Orange
+            'rgb(255, 159, 64)', // Orange
             'rgb(100, 149, 237)', // Cornflower Blue
             'rgb(255, 182, 193)', // Light Pink
             'rgb(144, 238, 144)', // Light Green
             'rgb(240, 128, 128)', // Light Coral
-            'rgb(255, 140, 0)',   // Dark Orange
+            'rgb(255, 140, 0)', // Dark Orange
             'rgb(173, 216, 230)', // Light Sky Blue
             'rgb(255, 228, 181)', // Moccasin
             'rgb(221, 160, 221)', // Plum
             'rgb(250, 128, 114)', // Salmon
-            'rgb(124, 252, 0)',   // Lawn Green
+            'rgb(124, 252, 0)', // Lawn Green
             'rgb(135, 206, 250)', // Light Steel Blue
             'rgb(255, 222, 173)', // Navajo White
             'rgb(238, 130, 238)', // Violet
-            'rgb(176, 224, 230)'  // Powder Blue
+            'rgb(176, 224, 230)', // Powder Blue
           ];
-                
-          if(graphType == "pie"){
-            backgroundColor = []
+
+          if (graphType == 'pie') {
+            backgroundColor = [];
             for (let i = 0; i < values.length; i++) {
-              backgroundColor.push(colors[i])              
+              backgroundColor.push(colors[i]);
             }
           }
 
-          label =label.value
+          label = label.value;
           // console.log(labels,values)
           const wrapper = document.createElement('div');
           wrapper.classList.add('resizable');
@@ -1102,10 +1092,10 @@ class Pagemodal {
           canvas.width = 400; // Set width
           canvas.height = 200; // Set height
 
-          let lineBreak = document.createElement("br")
+          let lineBreak = document.createElement('br');
 
           const editor = getEditorElement();
-          editor.appendChild(lineBreak)
+          editor.appendChild(lineBreak);
           wrapper.appendChild(canvas);
           wrapper.appendChild(resizeHandle);
 
@@ -1131,7 +1121,7 @@ class Pagemodal {
             options: {
               responsive: true,
               scales: {
-                 y: (graphType != ('pie') ) && {
+                y: graphType != 'pie' && {
                   beginAtZero: true,
                 },
               },
@@ -1249,7 +1239,6 @@ class Pagemodal {
 
     // console.log(modal)
   };
-  
 
   showModal() {
     this.#button.addEventListener('click', () => {
@@ -1299,4 +1288,3 @@ const barChartModal = new Pagemodal(
 );
 
 // })
-
