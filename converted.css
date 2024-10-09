@@ -1356,7 +1356,7 @@ svg[data-icon] {
   object-fit: cover;
 }
 
-.confirm-following {
+/* .confirm-following {
     order: 1;
     display: flex;
     height: 2rem;
@@ -1374,7 +1374,7 @@ svg[data-icon] {
     padding-bottom: 0.25rem;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
-}
+} */
 
 .app_notification_body_items > li .app_notification_m_content {
   flex-grow: 1;
@@ -1843,12 +1843,14 @@ svg[data-icon] {
     line-height: 1.25rem;
     font-weight: 700;
     --tw-text-opacity: 1;
-    color: rgb(59 130 246 / var(--tw-text-opacity));
+    /* color: rgb(59 130 246 / var(--tw-text-opacity)); */
     transition-property: all;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
+    padding: .3rem;
+    font-weight: 400;
 }
-
+/* 
 .confirm-following-group {
     order: 0;
     display: flex;
@@ -1859,7 +1861,7 @@ svg[data-icon] {
     gap: 0.5rem;
     padding: 0px;
     
-}
+} */
 /* 
 .confirm-cancel,
 .confirm-done {
