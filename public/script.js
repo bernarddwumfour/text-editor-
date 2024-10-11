@@ -2,11 +2,13 @@ const $headerDropdown = $(".header_dropdown");
 
 $(document).on("click", "#suggestions_expand", (event) => {
   const $el = $(event.currentTarget);
+  // alert("clicked")
 
   const list = $el.parent().find("ul");
-  const isExpanded = list.attr("aria-expanded") === "true";
+  const isExpanded = list.attr("aria-expanded");
   list.css("--item-count", list.children().length);
-  list.attr("aria-expanded", isExpanded ? "false" : "true");
+  list.setAttribute("aria-expanded",!isExpanded)
+  // list.attr("aria-expanded", isExpanded ? "false" : "true");
 });
 
 $(document).on("click", ".popup_trigger", (event) => {
@@ -31,7 +33,7 @@ $(document).on("click", ".popup_trigger", (event) => {
 $(document).on("click", ".sidebar_trigger", (event) => {
   const $sidebar = $("#sidebar");
   let isOpen = $sidebar.attr("aria-expanded");
-  console.log(isOpen)
+  // console.log(isOpen)
   document.getElementById("sidebar").setAttribute(isOpen,!isOpen)
   
 
