@@ -1,15 +1,17 @@
 const $headerDropdown = $(".header_dropdown");
 
-$(document).on("click", "#suggestions_expand", (event) => {
-  const $el = $(event.currentTarget);
-  // alert("clicked")
+// $(document).on("click", "#suggestions_expand", (event) => {
+//   const $el = $(event.currentTarget);
+//   // alert("clicked")
 
-  const list = $el.parent().find("ul");
-  const isExpanded = list.attr("aria-expanded");
-  list.css("--item-count", list.children().length);
-  list.setAttribute("aria-expanded",!isExpanded)
-  // list.attr("aria-expanded", isExpanded ? "false" : "true");
-});
+//   const list = $el.parent().find("ul");
+//   const isExpanded = list.attr("aria-expanded");
+//   list.css("--item-count", list.children().length);
+  
+//   document.getElementById("suggestions_expand").parentElement.querySelector("ul").setAttribute(aria,!isExpanded)
+//   // list.attr("aria-expanded", isExpanded ? "false" : "true");
+//   alert("clicked")
+// });
 
 $(document).on("click", ".popup_trigger", (event) => {
   const $el = $(event.currentTarget);
@@ -30,24 +32,24 @@ $(document).on("click", ".popup_trigger", (event) => {
   $el.attr("data-active", isOpen);
 });
 
-$(document).on("click", ".sidebar_trigger", (event) => {
-  const $sidebar = $("#sidebar");
-  let isOpen = $sidebar.attr("aria-expanded");
-  // console.log(isOpen)
-  document.getElementById("sidebar").setAttribute(isOpen,!isOpen)
+// $(document).on("click", ".sidebar_trigger", (event) => {
+//   const $sidebar = $("#sidebar");
+//   let isOpen = $sidebar.attr("aria-expanded");
+//   // console.log(isOpen)
+//   document.getElementById("sidebar").setAttribute(isOpen,!isOpen)
   
 
-  const $mainContent = $(".content_area");
-  if (isOpen) {
-    $mainContent.css("grid-template-columns", "1fr 20fr");
-  } else {
-    if (window.innerWidth > 3000) {
-      $mainContent.css("grid-template-columns", "1fr 7fr");
-    } else {
-      $mainContent.css("grid-template-columns", "1fr 4fr");
-    }
-  }
-});
+//   const $mainContent = $(".content_area");
+//   if (isOpen) {
+//     $mainContent.css("grid-template-columns", "1fr 20fr");
+//   } else {
+//     if (window.innerWidth > 3000) {
+//       $mainContent.css("grid-template-columns", "1fr 7fr");
+//     } else {
+//       $mainContent.css("grid-template-columns", "1fr 4fr");
+//     }
+//   }
+// });
 
 $(window).on("resize", () => {
   if (window.innerWidth > 768) {
