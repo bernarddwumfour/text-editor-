@@ -6,7 +6,7 @@ const undo = document.getElementsByClassName('undo')[0];
 const redo = document.getElementsByClassName('redo')[0];
 const editor = document.getElementsByClassName('editor')[0];
 
-let iframe = document.querySelectorAll('editorIframe');
+let iframe = document.querySelectorAll('.editorIframe')[0];
 for (let i = 0; i < iframe.length; i++) {
   iframe = iframe[i]
 }

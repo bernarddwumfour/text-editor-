@@ -30,8 +30,10 @@ $(document).on("click", ".popup_trigger", (event) => {
 
 $(document).on("click", ".sidebar_trigger", (event) => {
   const $sidebar = $("#sidebar");
-  const isOpen = $sidebar.attr("aria-expanded") === "true";
-  $sidebar.attr("aria-expanded", !isOpen);
+  let isOpen = $sidebar.attr("aria-expanded");
+  console.log(isOpen)
+  document.getElementById("sidebar").setAttribute(isOpen,!isOpen)
+  
 
   const $mainContent = $(".content_area");
   if (isOpen) {

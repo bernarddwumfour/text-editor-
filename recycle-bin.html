@@ -21,26 +21,29 @@
     rel="stylesheet"
     href="/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css"
   />
+      <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
     <!-- external scripts -->
      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="jquery.js"></script>
-    <script src="./script.js"></script>
+    <script src="/jquery.js" type="module"></script>
     <script src="/document/script.js"  type="module"></script>
+    <script src="/script.js" type="module"></script>
 
     <!-- stylesheets -->
-    <link
-    href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    rel="stylesheet"
-  />
-  <link
-  rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-/>
-<link rel="stylesheet" href="/document/converted.css" />
-<link rel="stylesheet" href="./converted.css" />
-    <link rel="stylesheet" href="./paper.css" />
+ 
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="./converted.css" />
     <link rel="import" href="./icons/sprite.svg" />
-    <link rel="stylesheet" href="/document/notification.css" />
+
+    <link rel="stylesheet" href="/document/converted.css" />
+    <link rel="stylesheet" href="./paper.css" />
+    <!-- <link rel="stylesheet" href="/document/notification.css" /> -->
     <link rel="stylesheet" href="/document/notification_page.css" />
 
   </head>
@@ -2098,7 +2101,7 @@
       </ul>
     </nav>
 
-    <div id="modal" class="modal">
+    <div id="modal" class="modal hidden-modal">
       <div class="modal-content">
         <div class="modal-menu">
           <div class="menu-nav">
@@ -2159,5 +2162,10 @@
     <script src="scripts/alpinejs.js"></script>
      <script src="./scripts/main.js" type="module"></script>
     <script src="/document/notification.js" type="module"></script>
+    <script>
+      // document.getElementsByClassName("sidebar_trigger")[0].addEventListener('click',()=>{
+      //   document.getElementById("sidebar").ariaExpanded=(!document.getElementById("sidebar").ariaExpanded)
+      // })
+    </script>
   </body>
 </html>
