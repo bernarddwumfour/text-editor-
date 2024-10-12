@@ -1362,10 +1362,10 @@
 
 /* Desktop Styles */
 @media (min-width: 1023px) {
-  .content_area {
+  /* .content_area {
     display: grid;
     grid-template-columns: 1fr 4fr;
-  }
+  } */
 
   .paper_container {
     display: flex;
